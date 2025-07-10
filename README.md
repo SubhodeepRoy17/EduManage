@@ -53,26 +53,26 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/edumanage-teacher-system.git
-   cd edumanage-teacher-system
+   cd teacher-management
    ```
 
 2. **Install dependencies**
-   \`\`\`bash
+   ```bash
    npm install
    # or
    yarn install
    # or
    pnpm install
-   \`\`\`
+   ```
 
 3. **Run the development server**
-   \`\`\`bash
+   ```bash
    npm run dev
    # or
    yarn dev
    # or
    pnpm dev
-   \`\`\`
+   ```
 
 4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
@@ -81,7 +81,7 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 
 Create a `.env.local` file in the root directory:
 
-\`\`\`env
+```env
 # Application Configuration
 NEXT_PUBLIC_APP_NAME=EduManage
 NEXT_PUBLIC_APP_VERSION=1.0.0
@@ -92,16 +92,16 @@ API_SECRET_KEY=your-secret-key-here
 
 # Database Configuration (for future integration)
 DATABASE_URL=postgresql://username:password@localhost:5432/edumanage
-\`\`\`
+```
 
 ## 🚀 Getting Started
 
 ### Development Workflow
 
 1. **Start the development server**
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
 
 2. **View the application**
    - Desktop: Full sidebar navigation with collapsible functionality
@@ -114,7 +114,7 @@ DATABASE_URL=postgresql://username:password@localhost:5432/edumanage
 
 ### Building for Production
 
-\`\`\`bash
+```bash
 # Build the application
 npm run build
 
@@ -126,11 +126,11 @@ npm run lint
 
 # Run type checking
 npm run type-check
-\`\`\`
+```
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 edumanage-teacher-system/
 ├── app/                          # Next.js App Router
 │   ├── globals.css              # Global styles and Tailwind CSS
@@ -162,20 +162,20 @@ edumanage-teacher-system/
 ├── tailwind.config.js         # Tailwind CSS configuration
 ├── tsconfig.json              # TypeScript configuration
 └── package.json               # Dependencies and scripts
-\`\`\`
+```
 
 ## 🎯 Features Deep Dive
 
 ### 1. Mobile Navigation System
 
 #### Desktop Sidebar (`desktop-sidebar.tsx`)
-\`\`\`typescript
+```typescript
 // Collapsible sidebar with smooth transitions
 const [collapsed, setCollapsed] = useState(false)
 
 // Hidden on mobile, visible on desktop
 className="hidden md:flex bg-slate-900 text-white"
-\`\`\`
+```
 
 **Features:**
 - Collapsible with chevron toggle
@@ -184,14 +184,14 @@ className="hidden md:flex bg-slate-900 text-white"
 - Professional dark theme
 
 #### Mobile Drawer (`mobile-drawer.tsx`)
-\`\`\`typescript
+```typescript
 // Sheet-based drawer with backdrop
 <Sheet open={open} onOpenChange={setOpen}>
   <SheetContent side="left" className="w-80 bg-slate-900">
     {/* Navigation content */}
   </SheetContent>
 </Sheet>
-\`\`\`
+```
 
 **Features:**
 - Slide-out animation from left
@@ -202,7 +202,7 @@ className="hidden md:flex bg-slate-900 text-white"
 ### 2. Schedule Management System
 
 #### Horizontal Scrolling Grid
-\`\`\`typescript
+```typescript
 // Responsive schedule grid with sticky time column
 <ScrollArea className="w-full">
   <div className="min-w-[800px]">
@@ -213,7 +213,7 @@ className="hidden md:flex bg-slate-900 text-white"
     {/* Scrollable day columns */}
   </div>
 </ScrollArea>
-\`\`\`
+```
 
 **Features:**
 - **22 time slots**: 7:30am to 6:00pm in 30-minute intervals
@@ -223,7 +223,7 @@ className="hidden md:flex bg-slate-900 text-white"
 - **Touch-optimized**: Smooth scrolling with proper touch targets
 
 #### Schedule Status System
-\`\`\`typescript
+```typescript
 interface ScheduleSlot {
   id: string
   day: string
@@ -232,12 +232,12 @@ interface ScheduleSlot {
   status: "available" | "booked" | "unavailable"
   subject?: string
 }
-\`\`\`
+```
 
 ### 3. Teacher Profile Management
 
 #### Responsive Header Design
-\`\`\`typescript
+```typescript
 // Adaptive layout: stacked on mobile, side-by-side on desktop
 <div className="flex flex-col xs:flex-row items-center xs:items-start">
   <Avatar className="h-16 w-16 sm:h-20 sm:w-20" />
@@ -245,7 +245,7 @@ interface ScheduleSlot {
     {/* Profile information */}
   </div>
 </div>
-\`\`\`
+```
 
 **Features:**
 - **Responsive avatar**: 64px mobile, 80px desktop
@@ -256,14 +256,14 @@ interface ScheduleSlot {
 ### 4. Qualifications Management
 
 #### CRUD Operations Interface
-\`\`\`typescript
+```typescript
 interface Qualification {
   id: string
   name: string
   rate: number
   type: "private" | "group"
 }
-\`\`\`
+```
 
 **Features:**
 - **Dual tables**: Separate private and group qualifications
@@ -275,7 +275,7 @@ interface Qualification {
 ### 5. Payment Management System
 
 #### Form Validation & Processing
-\`\`\`typescript
+```typescript
 const validateForm = (): boolean => {
   const newErrors: FormErrors = {}
   
@@ -286,7 +286,7 @@ const validateForm = (): boolean => {
   
   return Object.keys(newErrors).length === 0
 }
-\`\`\`
+```
 
 **Features:**
 - **Payment scheduling**: Date-based payment planning
@@ -307,7 +307,7 @@ const validateForm = (): boolean => {
 - Prevents desktop-centric design limitations
 
 **Implementation**:
-\`\`\`css
+```css
 /* Mobile-first CSS approach */
 .component {
   /* Mobile styles (default) */
@@ -320,7 +320,7 @@ const validateForm = (): boolean => {
     @apply text-base p-4;
   }
 }
-\`\`\`
+```
 
 ### 2. Separate Navigation Components
 
@@ -355,13 +355,13 @@ const validateForm = (): boolean => {
 - Clear data flow and state management
 
 **Structure**:
-\`\`\`
+```
 Components/
 ├── Layout Components (Sidebar, Drawer, Header)
 ├── Feature Components (Schedule, Qualifications, Payments)
 ├── UI Components (shadcn/ui primitives)
 └── Utility Components (Toast, Loading states)
-\`\`\`
+```
 
 ### 5. TypeScript Integration
 
@@ -372,7 +372,7 @@ Components/
 - Self-documenting code with interface definitions
 
 **Type System**:
-\`\`\`typescript
+```typescript
 // Comprehensive type definitions
 interface TeacherProfile {
   teacher: Teacher
@@ -380,7 +380,7 @@ interface TeacherProfile {
   groupQualifications: Qualification[]
   schedule: ScheduleSlot[]
 }
-\`\`\`
+```
 
 ### 6. Styling Strategy
 
@@ -397,28 +397,28 @@ interface TeacherProfile {
 
 ### Breakpoint System
 
-\`\`\`css
+```css
 /* Custom breakpoint strategy */
 xs: 475px   /* Extra small devices (large phones) */
 sm: 640px   /* Small devices (tablets) */
 md: 768px   /* Medium devices (small laptops) */
 lg: 1024px  /* Large devices (desktops) */
 xl: 1280px  /* Extra large devices (large desktops) */
-\`\`\`
+```
 
 ### Touch Optimization
 
 #### Minimum Tap Targets
-\`\`\`css
+```css
 /* WCAG 2.1 AA compliance */
 button, a, [role="button"] {
   min-height: 44px;
   min-width: 44px;
 }
-\`\`\`
+```
 
 #### iOS Safari Optimizations
-\`\`\`css
+```css
 /* Prevent zoom on form inputs */
 input, select, textarea {
   font-size: 16px;
@@ -429,11 +429,11 @@ input, select, textarea {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
 }
-\`\`\`
+```
 
 ### Responsive Typography
 
-\`\`\`css
+```css
 /* Adaptive text sizing */
 @media (max-width: 640px) {
   h1 { @apply text-lg; }    /* 18px */
@@ -448,25 +448,25 @@ input, select, textarea {
   h3 { @apply text-lg; }    /* 18px */
   body { @apply text-base; } /* 16px */
 }
-\`\`\`
+```
 
 ### Layout Adaptations
 
 #### Grid Systems
-\`\`\`typescript
+```typescript
 // Responsive grid layouts
 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
 
 // Flexible layouts
 className="flex flex-col md:flex-row items-start md:items-center"
-\`\`\`
+```
 
 #### Spacing System
-\`\`\`typescript
+```typescript
 // Mobile-first spacing
 className="p-2 sm:p-4 md:p-6"  // 8px -> 16px -> 24px
 className="space-y-2 sm:space-y-4 md:space-y-6"  // Vertical spacing
-\`\`\`
+```
 
 ## 🔌 API Integration
 
@@ -474,7 +474,7 @@ className="space-y-2 sm:space-y-4 md:space-y-6"  // Vertical spacing
 
 The application currently uses mock data for demonstration purposes:
 
-\`\`\`typescript
+```typescript
 // Mock teacher profile data
 const mockTeacherProfile: TeacherProfile = {
   teacher: {
@@ -498,13 +498,13 @@ const mockTeacherProfile: TeacherProfile = {
     // ... additional schedule slots
   ],
 }
-\`\`\`
+```
 
 ### Future API Integration
 
 #### Recommended API Structure
 
-\`\`\`typescript
+```typescript
 // API endpoints structure
 const API_ENDPOINTS = {
   teachers: {
@@ -531,27 +531,27 @@ const API_ENDPOINTS = {
     history: '/api/teachers/:id/payments/history'
   }
 }
-\`\`\`
+```
 
 #### Integration Steps
 
 1. **Replace mock data with API calls**
-   \`\`\`typescript
+   ```typescript
    // Example API integration
    const fetchTeacherProfile = async (id: string): Promise<TeacherProfile> => {
      const response = await fetch(`/api/teachers/${id}`)
      return response.json()
    }
-   \`\`\`
+   ```
 
 2. **Add loading states**
-   \`\`\`typescript
+   ```typescript
    const [loading, setLoading] = useState(true)
    const [error, setError] = useState<string | null>(null)
-   \`\`\`
+   ```
 
 3. **Implement error handling**
-   \`\`\`typescript
+   ```typescript
    try {
      const data = await fetchTeacherProfile(teacherId)
      setTeacherProfile(data)
@@ -560,14 +560,14 @@ const API_ENDPOINTS = {
    } finally {
      setLoading(false)
    }
-   \`\`\`
+   ```
 
 ## 🎨 Customization
 
 ### Theme Customization
 
 #### Colors
-\`\`\`css
+```css
 /* Customize in globals.css */
 :root {
   --primary: 221.2 83.2% 53.3%;        /* Blue primary */
@@ -575,10 +575,10 @@ const API_ENDPOINTS = {
   --accent: 210 40% 96%;                /* Accent color */
   --destructive: 0 84.2% 60.2%;         /* Red for errors */
 }
-\`\`\`
+```
 
 #### Typography
-\`\`\`javascript
+```javascript
 // Customize in tailwind.config.js
 module.exports = {
   theme: {
@@ -590,12 +590,12 @@ module.exports = {
     },
   },
 }
-\`\`\`
+```
 
 ### Component Customization
 
 #### Adding New Schedule Status
-\`\`\`typescript
+```typescript
 // 1. Update type definition
 type ScheduleStatus = "available" | "booked" | "unavailable" | "tentative"
 
@@ -615,10 +615,10 @@ const getStatusBadge = (status: string) => {
   }
   // ... existing logic
 }
-\`\`\`
+```
 
 #### Custom Payment Types
-\`\`\`typescript
+```typescript
 // Add new payment type
 interface PaymentForm {
   type: "salary" | "bonus" | "commission" | "reimbursement"
@@ -627,11 +627,11 @@ interface PaymentForm {
 
 // Update form options
 <SelectItem value="reimbursement">Reimbursement</SelectItem>
-\`\`\`
+```
 
 ### Responsive Breakpoint Customization
 
-\`\`\`javascript
+```javascript
 // tailwind.config.js
 module.exports = {
   theme: {
@@ -648,28 +648,28 @@ module.exports = {
     },
   },
 }
-\`\`\`
+```
 
 ## 🚀 Deployment
 
 ### Vercel Deployment (Recommended)
 
 1. **Connect to Vercel**
-   \`\`\`bash
+   ```bash
    npm install -g vercel
    vercel login
    vercel
-   \`\`\`
+   ```
 
 2. **Environment Variables**
    Set in Vercel dashboard:
-   \`\`\`
+   ```
    NEXT_PUBLIC_APP_NAME=EduManage
    NEXT_PUBLIC_API_URL=https://your-api.com
-   \`\`\`
+   ```
 
 3. **Build Configuration**
-   \`\`\`javascript
+   ```javascript
    // next.config.js
    module.exports = {
      output: 'standalone',
@@ -677,11 +677,11 @@ module.exports = {
        domains: ['your-image-domain.com'],
      },
    }
-   \`\`\`
+   ```
 
 ### Docker Deployment
 
-\`\`\`dockerfile
+```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
 
@@ -715,11 +715,11 @@ EXPOSE 3000
 ENV PORT 3000
 
 CMD ["node", "server.js"]
-\`\`\`
+```
 
 ### Static Export (Optional)
 
-\`\`\`javascript
+```javascript
 // next.config.js
 module.exports = {
   output: 'export',
@@ -728,18 +728,18 @@ module.exports = {
     unoptimized: true,
   },
 }
-\`\`\`
+```
 
 ## 🧪 Testing
 
 ### Unit Testing Setup
 
-\`\`\`bash
+```bash
 # Install testing dependencies
 npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom
-\`\`\`
+```
 
-\`\`\`javascript
+```javascript
 // jest.config.js
 module.exports = {
   testEnvironment: 'jsdom',
@@ -748,11 +748,11 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/$1',
   },
 }
-\`\`\`
+```
 
 ### Example Tests
 
-\`\`\`typescript
+```typescript
 // __tests__/components/teacher-header.test.tsx
 import { render, screen } from '@testing-library/react'
 import { TeacherHeader } from '@/components/teacher-header'
@@ -775,11 +775,11 @@ describe('TeacherHeader', () => {
     expect(screen.getByText('Edit Profile')).toBeInTheDocument()
   })
 })
-\`\`\`
+```
 
 ### Mobile Testing
 
-\`\`\`typescript
+```typescript
 // Mobile viewport testing
 import { render } from '@testing-library/react'
 
@@ -796,13 +796,13 @@ describe('Mobile Navigation', () => {
     // Test implementation
   })
 })
-\`\`\`
+```
 
 ## 🔧 Performance Optimization
 
 ### Bundle Analysis
 
-\`\`\`bash
+```bash
 # Analyze bundle size
 npm install --save-dev @next/bundle-analyzer
 
@@ -817,11 +817,11 @@ module.exports = withBundleAnalyzer({
 
 # Run analysis
 ANALYZE=true npm run build
-\`\`\`
+```
 
 ### Image Optimization
 
-\`\`\`typescript
+```typescript
 // Use Next.js Image component
 import Image from 'next/image'
 
@@ -834,11 +834,11 @@ import Image from 'next/image'
   placeholder="blur"
   blurDataURL="data:image/jpeg;base64,..."
 />
-\`\`\`
+```
 
 ### Code Splitting
 
-\`\`\`typescript
+```typescript
 // Dynamic imports for large components
 import dynamic from 'next/dynamic'
 
@@ -849,13 +849,13 @@ const PaymentInterface = dynamic(
     ssr: false 
   }
 )
-\`\`\`
+```
 
 ## 🔒 Security Considerations
 
 ### Input Validation
 
-\`\`\`typescript
+```typescript
 // Client-side validation
 const validatePaymentForm = (data: PaymentForm): FormErrors => {
   const errors: FormErrors = {}
@@ -872,20 +872,20 @@ const validatePaymentForm = (data: PaymentForm): FormErrors => {
   
   return errors
 }
-\`\`\`
+```
 
 ### Environment Variables
 
-\`\`\`bash
+```bash
 # .env.local (never commit to version control)
 DATABASE_URL=postgresql://...
 API_SECRET_KEY=your-secret-key
 NEXTAUTH_SECRET=your-nextauth-secret
-\`\`\`
+```
 
 ### Content Security Policy
 
-\`\`\`javascript
+```javascript
 // next.config.js
 module.exports = {
   async headers() {
@@ -902,7 +902,7 @@ module.exports = {
     ]
   }
 }
-\`\`\`
+```
 
 ## 📚 Assumptions Made
 
@@ -992,17 +992,17 @@ module.exports = {
 
 1. **Fork the repository**
 2. **Create a feature branch**
-   \`\`\`bash
+   ```bash
    git checkout -b feature/your-feature-name
-   \`\`\`
+   ```
 
 3. **Make your changes**
 4. **Run tests**
-   \`\`\`bash
+   ```bash
    npm run test
    npm run lint
    npm run type-check
-   \`\`\`
+   ```
 
 5. **Submit a pull request**
 
@@ -1024,7 +1024,7 @@ module.exports = {
 - Maintain responsive design principles
 
 #### Git Workflow
-\`\`\`bash
+```bash
 # Commit message format
 feat: add mobile drawer navigation
 fix: resolve schedule grid scrolling issue
@@ -1032,7 +1032,7 @@ docs: update README with deployment instructions
 style: improve mobile button spacing
 refactor: extract payment validation logic
 test: add unit tests for teacher header
-\`\`\`
+```
 
 ### Pull Request Guidelines
 
