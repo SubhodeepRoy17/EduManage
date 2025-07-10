@@ -1,16 +1,15 @@
 # EduManage - Teacher Management System
 
-A modern, fully responsive teacher management interface built with Next.js, TypeScript, and Tailwind CSS. Features separate mobile drawer navigation, horizontal scrolling schedule grid, and complete mobile optimization.
+A modern, fully responsive teacher management interface built with Next.js, TypeScript, and Tailwind CSS. Features mobile-optimized navigation, horizontal scrolling schedule grid, and comprehensive teacher profile management.
 
 ![EduManage Preview](https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=EduManage+Teacher+Management+System)
 
 ## 🚀 Features
 
 ### 📱 Mobile-First Design
-- **Separate Mobile Drawer**: Sheet-based navigation with backdrop overlay
+- **Responsive Navigation**: Adaptive sidebar with mobile drawer functionality
 - **Horizontal Schedule Scrolling**: All 7 days visible with sticky time column
 - **Touch-Optimized UI**: 44px+ tap targets and smooth interactions
-- **Responsive Typography**: Adaptive text sizes across all screen sizes
 - **Mobile-Specific Components**: Optimized layouts for small screens
 
 ### 🎯 Core Functionality
@@ -52,13 +51,13 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/edumanage-teacher-system.git
+   git clone https://github.com/EduManage/teacher-management.git
    cd teacher-management
    ```
 
 2. **Install dependencies**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    # or
    yarn install
    # or
@@ -76,23 +75,6 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 
 4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
-
-### Environment Setup
-
-Create a `.env.local` file in the root directory:
-
-```env
-# Application Configuration
-NEXT_PUBLIC_APP_NAME=EduManage
-NEXT_PUBLIC_APP_VERSION=1.0.0
-
-# API Configuration (when backend is integrated)
-NEXT_PUBLIC_API_URL=http://localhost:3001/api
-API_SECRET_KEY=your-secret-key-here
-
-# Database Configuration (for future integration)
-DATABASE_URL=postgresql://username:password@localhost:5432/edumanage
-```
 
 ## 🚀 Getting Started
 
@@ -131,106 +113,175 @@ npm run type-check
 ## 📁 Project Structure
 
 ```
-edumanage-teacher-system/
-├── app/                          # Next.js App Router
-│   ├── globals.css              # Global styles and Tailwind CSS
-│   ├── layout.tsx               # Root layout with metadata
-│   └── page.tsx                 # Main application page
-├── components/                   # React components
-│   ├── ui/                      # shadcn/ui base components
-│   │   ├── button.tsx
-│   │   ├── card.tsx
-│   │   ├── input.tsx
-│   │   ├── sheet.tsx
-│   │   ├── tabs.tsx
-│   │   └── ...
-│   ├── desktop-sidebar.tsx      # Desktop navigation sidebar
-│   ├── mobile-drawer.tsx        # Mobile navigation drawer
-│   ├── teacher-header.tsx       # Teacher profile header
+teacher-management/
+├── types/
+│   └── teacher.ts              # TypeScript interfaces and types
+├── components/
+│   ├── sidebar.tsx             # Navigation sidebar with mobile support
+│   ├── teacher-header.tsx      # Teacher profile header component
 │   ├── qualifications-section.tsx # Qualifications management
-│   ├── schedule-calendar.tsx    # Schedule grid with horizontal scroll
-│   └── payment-interface.tsx    # Payment management interface
-├── types/                       # TypeScript type definitions
-│   └── teacher.ts              # Teacher-related interfaces
-├── lib/                        # Utility functions
-│   └── utils.ts               # Common utilities (cn function)
-├── hooks/                      # Custom React hooks
-│   └── use-toast.ts           # Toast notification hook
-├── public/                     # Static assets
-├── .env.local                  # Environment variables
-├── next.config.js             # Next.js configuration
-├── tailwind.config.js         # Tailwind CSS configuration
-├── tsconfig.json              # TypeScript configuration
-└── package.json               # Dependencies and scripts
+│   ├── schedule-calendar.tsx   # Schedule grid with mobile scroll
+│   └── payment-interface.tsx   # Payment management system
+├── app/
+│   ├── page.tsx               # Main application page
+│   ├── layout.tsx             # Root layout with metadata
+│   └── globals.css            # Global styles and responsive utilities
+├── public/                    # Static assets
+├── next.config.js            # Next.js configuration
+├── tailwind.config.js        # Tailwind CSS configuration
+├── tsconfig.json             # TypeScript configuration
+└── package.json              # Dependencies and scripts
+```
+
+### Core Files Explanation
+
+#### `components/sidebar.tsx`
+Responsive navigation component with mobile/desktop adaptation:
+
+```typescript
+// Features:
+// - Collapsible desktop sidebar (64px ↔ 256px)
+// - Mobile drawer with backdrop overlay
+// - Active state management
+// - Touch-friendly navigation items
+// - Smooth transitions and animations
+```
+
+#### `components/teacher-header.tsx`
+Teacher profile display with responsive layout:
+
+```typescript
+// Features:
+// - Responsive avatar sizing (64px mobile, 80px desktop)
+// - Adaptive layout (stacked mobile, side-by-side desktop)
+// - Contact information cards
+// - Edit profile functionality
+// - Role badges and status indicators
+```
+
+#### `components/qualifications-section.tsx`
+CRUD interface for teacher qualifications:
+
+```typescript
+// Features:
+// - Dual tables (private/group qualifications)
+// - Horizontal scrolling on mobile
+// - Add/Edit/Delete operations
+// - Rate management with currency formatting
+// - Responsive table design
+```
+
+#### `components/schedule-calendar.tsx`
+Interactive weekly schedule with mobile optimization:
+
+```typescript
+// Features:
+// - 22 time slots (7:30am - 6:00pm)
+// - 7-day week view with horizontal scroll
+// - Sticky time column for mobile
+// - Status indicators (Available/Booked/Unavailable)
+// - Touch-optimized grid interactions
+// - Mobile legend for status colors
+```
+
+#### `components/payment-interface.tsx`
+Payment management with form validation:
+
+```typescript
+// Features:
+// - Payment scheduling form with validation
+// - Multiple payment types and methods
+// - Payment history with status tracking
+// - Loading states and error handling
+// - Mobile-optimized form layout
+// - Horizontal scrolling payment table
+```
+
+#### `app/page.tsx`
+Main application orchestration:
+
+```typescript
+// Features:
+// - Tab-based navigation (Profile/Qualifications/Schedule/Payments)
+// - State management for teacher profile
+// - Toast notifications for user feedback
+// - Responsive tab layout
+// - Mock data integration
+```
+
+#### `app/layout.tsx`
+Root application layout and metadata:
+
+```typescript
+// Features:
+// - Global font configuration (Inter)
+// - SEO metadata setup
+// - Toast provider integration
+// - HTML structure and accessibility
+```
+
+#### `app/globals.css`
+Comprehensive styling system:
+
+```css
+/* Features:
+ * - Tailwind CSS integration
+ * - Custom responsive utilities
+ * - Mobile-specific optimizations
+ * - Touch interaction improvements
+ * - Custom scrollbar styling
+ * - Animation definitions
+ */
 ```
 
 ## 🎯 Features Deep Dive
 
-### 1. Mobile Navigation System
+### 1. Responsive Navigation System
 
-#### Desktop Sidebar (`desktop-sidebar.tsx`)
-```typescript
-// Collapsible sidebar with smooth transitions
-const [collapsed, setCollapsed] = useState(false)
+#### Desktop Sidebar
+- **Collapsible Design**: Toggles between 64px (icons only) and 256px (full labels)
+- **Smooth Transitions**: CSS transitions for width changes
+- **Active State**: Visual highlighting of current page
+- **Professional Theme**: Dark slate background with white text
 
-// Hidden on mobile, visible on desktop
-className="hidden md:flex bg-slate-900 text-white"
-```
-
-**Features:**
-- Collapsible with chevron toggle
-- Smooth width transitions (64px collapsed, 256px expanded)
-- Active state highlighting
-- Professional dark theme
-
-#### Mobile Drawer (`mobile-drawer.tsx`)
-```typescript
-// Sheet-based drawer with backdrop
-<Sheet open={open} onOpenChange={setOpen}>
-  <SheetContent side="left" className="w-80 bg-slate-900">
-    {/* Navigation content */}
-  </SheetContent>
-</Sheet>
-```
-
-**Features:**
-- Slide-out animation from left
-- Backdrop overlay with click-to-close
-- Touch-friendly navigation items
-- Auto-close on navigation
+#### Mobile Navigation
+- **Drawer Pattern**: Slides in from left with backdrop overlay
+- **Touch-Friendly**: Large tap targets (48px minimum height)
+- **Auto-Close**: Closes automatically after navigation
+- **Hamburger Menu**: Fixed position button for easy access
 
 ### 2. Schedule Management System
 
-#### Horizontal Scrolling Grid
+#### Time Grid Layout
 ```typescript
-// Responsive schedule grid with sticky time column
-<ScrollArea className="w-full">
-  <div className="min-w-[800px]">
-    {/* Sticky time column */}
-    <div className="sticky left-0 z-10 bg-white">
-      {timeSlot}
-    </div>
-    {/* Scrollable day columns */}
-  </div>
-</ScrollArea>
+// 22 time slots covering full teaching day
+const timeSlots = [
+  "7:30am", "8am", "8:30am", "9am", "9:30am", "10am",
+  "10:30am", "11am", "11:30am", "12pm", "12:30pm", "1pm",
+  "1:30pm", "2pm", "2:30pm", "3pm", "3:30pm", "4pm",
+  "4:30pm", "5pm", "5:30pm", "6pm"
+]
+
+// 7-day week view
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", 
+              "Friday", "Saturday", "Sunday"]
 ```
 
-**Features:**
-- **22 time slots**: 7:30am to 6:00pm in 30-minute intervals
-- **7-day week view**: Monday through Sunday
-- **Status indicators**: Available (green), Booked (blue), Unavailable (gray)
-- **Sticky time column**: Always visible during horizontal scroll
-- **Touch-optimized**: Smooth scrolling with proper touch targets
+#### Mobile Optimization
+- **Horizontal Scrolling**: All days visible with smooth touch scrolling
+- **Sticky Time Column**: Time slots remain visible during horizontal scroll
+- **Compact Status Badges**: "Free", "Busy", "N/A" for mobile screens
+- **Touch Targets**: 40px minimum height for schedule slots
+- **Visual Legend**: Color-coded status indicators below grid
 
-#### Schedule Status System
+#### Status System
 ```typescript
 interface ScheduleSlot {
-  id: string
-  day: string
-  startTime: string
-  endTime: string
   status: "available" | "booked" | "unavailable"
-  subject?: string
+  // Color mapping:
+  // available → green (bg-green-100, border-green-300)
+  // booked → blue (bg-blue-100, border-blue-300)
+  // unavailable → gray (bg-gray-100, border-gray-300)
 }
 ```
 
@@ -238,7 +289,8 @@ interface ScheduleSlot {
 
 #### Responsive Header Design
 ```typescript
-// Adaptive layout: stacked on mobile, side-by-side on desktop
+// Mobile: Stacked layout with centered content
+// Desktop: Side-by-side with left-aligned content
 <div className="flex flex-col xs:flex-row items-center xs:items-start">
   <Avatar className="h-16 w-16 sm:h-20 sm:w-20" />
   <div className="text-center xs:text-left">
@@ -247,63 +299,83 @@ interface ScheduleSlot {
 </div>
 ```
 
-**Features:**
-- **Responsive avatar**: 64px mobile, 80px desktop
-- **Contact information cards**: Email, phone, address
-- **Role badges**: Visual role identification
-- **Edit functionality**: Profile modification interface
+#### Contact Information Cards
+- **Email Card**: With mail icon and break-word for long emails
+- **Phone Card**: With phone icon and formatted number
+- **Address Card**: With map pin icon and city/country display
+- **Responsive Grid**: Stacks on mobile, side-by-side on desktop
 
 ### 4. Qualifications Management
 
-#### CRUD Operations Interface
+#### Dual Table System
 ```typescript
-interface Qualification {
-  id: string
-  name: string
-  rate: number
-  type: "private" | "group"
-}
+// Separate tables for different qualification types
+<QualificationTable 
+  qualifications={privateQualifications} 
+  title="Private Qualifications" 
+  type="private" 
+/>
+<QualificationTable 
+  qualifications={groupQualifications} 
+  title="Group Qualifications" 
+  type="group" 
+/>
 ```
 
-**Features:**
-- **Dual tables**: Separate private and group qualifications
-- **Horizontal scrolling**: Mobile-optimized table display
-- **Action buttons**: Edit and delete with confirmation
-- **Rate management**: Hourly rate tracking
-- **Add functionality**: New qualification creation
+#### Mobile Table Optimization
+- **Horizontal Scrolling**: Tables scroll horizontally on mobile
+- **Minimum Width**: 300px minimum ensures proper column spacing
+- **Compact Actions**: 8x8px action buttons for mobile
+- **Responsive Text**: xs on mobile, sm on desktop
 
 ### 5. Payment Management System
 
-#### Form Validation & Processing
+#### Form Validation System
 ```typescript
 const validateForm = (): boolean => {
   const newErrors: FormErrors = {}
   
+  // Amount validation
   if (!formData.amount || parseFloat(formData.amount) <= 0) {
     newErrors.amount = "Please enter a valid amount"
   }
-  // Additional validation...
+  
+  // Required field validation
+  if (!formData.description.trim()) {
+    newErrors.description = "Description is required"
+  }
+  
+  // Selection validation
+  if (!formData.paymentMethod) {
+    newErrors.paymentMethod = "Please select a payment method"
+  }
   
   return Object.keys(newErrors).length === 0
 }
 ```
 
-**Features:**
-- **Payment scheduling**: Date-based payment planning
-- **Multiple payment types**: Salary, bonus, commission
-- **Payment methods**: Bank transfer, PayPal, check, cash
-- **Status tracking**: Pending, processing, completed, failed
-- **Form validation**: Real-time error feedback
-- **Payment history**: Comprehensive transaction log
+#### Payment Status Tracking
+```typescript
+// Visual status indicators with icons
+const getStatusIcon = (status: string) => {
+  switch (status) {
+    case "completed": return <CheckCircle className="text-green-600" />
+    case "failed": return <XCircle className="text-red-600" />
+    case "processing": return <Loader2 className="text-blue-600 animate-spin" />
+    default: return <Clock className="text-yellow-600" />
+  }
+}
+```
 
 ## 🎨 Design Decisions
 
 ### 1. Mobile-First Architecture
 
 **Decision**: Build mobile experience first, then enhance for desktop
+
 **Rationale**: 
-- 60%+ of users access educational platforms on mobile
-- Ensures core functionality works on all devices
+- 60%+ of educational platform users access on mobile devices
+- Ensures core functionality works on all screen sizes
 - Prevents desktop-centric design limitations
 
 **Implementation**:
@@ -322,98 +394,119 @@ const validateForm = (): boolean => {
 }
 ```
 
-### 2. Separate Navigation Components
+### 2. Unified Sidebar Component
 
-**Decision**: Create distinct mobile and desktop navigation components
+**Decision**: Single sidebar component with responsive behavior
+
 **Rationale**:
-- Different interaction patterns (touch vs. mouse)
-- Optimized performance (load only needed component)
-- Cleaner code organization and maintenance
+- Reduces code duplication
+- Consistent navigation experience
+- Easier maintenance and updates
 
-**Trade-offs**:
-- ✅ Better user experience per platform
-- ✅ Optimized performance
-- ❌ Slightly more code to maintain
+**Implementation**:
+```typescript
+// Responsive behavior within single component
+const [mobileOpen, setMobileOpen] = useState(false)
+const [isMobile, setIsMobile] = useState(false)
+
+// Adaptive rendering based on screen size
+{isMobile ? (
+  <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+    {/* Mobile drawer content */}
+  </Sheet>
+) : (
+  <div className={collapsed ? "w-16" : "w-64"}>
+    {/* Desktop sidebar content */}
+  </div>
+)}
+```
 
 ### 3. Horizontal Schedule Scrolling
 
 **Decision**: Implement horizontal scrolling for schedule grid on mobile
+
 **Rationale**:
-- Preserves all 7 days visibility
-- Maintains time slot granularity
+- Preserves weekly overview context
+- Maintains time slot granularity (30-minute intervals)
 - Natural mobile interaction pattern
+- Sticky time column keeps reference point visible
 
 **Alternative Considered**: Vertical day stacking
-**Why Rejected**: Would require excessive scrolling and lose weekly overview
+**Why Rejected**: Would require excessive scrolling and lose weekly context
 
-### 4. Component-Based Architecture
+### 4. Tab-Based Main Navigation
 
-**Decision**: Modular component structure with clear separation of concerns
+**Decision**: Use tabs for primary content sections
+
 **Rationale**:
-- Reusability across different views
-- Easier testing and maintenance
-- Clear data flow and state management
+- Clear content organization
+- Mobile-friendly navigation pattern
+- Reduces cognitive load
+- Easy to implement with keyboard navigation
 
-**Structure**:
+**Mobile Optimization**:
+```typescript
+// Vertical icon/text layout for mobile tabs
+<TabsTrigger className="flex flex-col items-center space-y-1 text-xs py-2">
+  <Icon size={14} />
+  <span>Label</span>
+</TabsTrigger>
 ```
-Components/
-├── Layout Components (Sidebar, Drawer, Header)
-├── Feature Components (Schedule, Qualifications, Payments)
-├── UI Components (shadcn/ui primitives)
-└── Utility Components (Toast, Loading states)
-```
 
-### 5. TypeScript Integration
+### 5. TypeScript-First Development
 
-**Decision**: Full TypeScript implementation with strict type checking
+**Decision**: Comprehensive TypeScript implementation with strict typing
+
 **Rationale**:
 - Prevents runtime errors in production
 - Better developer experience with IntelliSense
 - Self-documenting code with interface definitions
+- Easier refactoring and maintenance
 
-**Type System**:
+**Type System Architecture**:
 ```typescript
-// Comprehensive type definitions
-interface TeacherProfile {
+// Centralized type definitions in types/teacher.ts
+export interface TeacherProfile {
   teacher: Teacher
   privateQualifications: Qualification[]
   groupQualifications: Qualification[]
   schedule: ScheduleSlot[]
 }
+
+// Strict typing throughout components
+interface TeacherHeaderProps {
+  teacher: Teacher
+  onEdit?: () => void
+}
 ```
-
-### 6. Styling Strategy
-
-**Decision**: Tailwind CSS with shadcn/ui component library
-**Rationale**:
-- Rapid development with utility classes
-- Consistent design system
-- Excellent mobile responsiveness utilities
-- Professional component library
-
-**Custom CSS**: Limited to specific mobile optimizations and animations
 
 ## 📱 Mobile Responsiveness
 
 ### Breakpoint System
 
 ```css
-/* Custom breakpoint strategy */
-xs: 475px   /* Extra small devices (large phones) */
-sm: 640px   /* Small devices (tablets) */
-md: 768px   /* Medium devices (small laptops) */
+/* Tailwind CSS breakpoint strategy */
+/* Default: Mobile-first (0px+) */
+sm: 640px   /* Small devices (large phones, small tablets) */
+md: 768px   /* Medium devices (tablets, small laptops) */
 lg: 1024px  /* Large devices (desktops) */
 xl: 1280px  /* Extra large devices (large desktops) */
+2xl: 1536px /* 2X large devices (very large screens) */
+
+/* Custom breakpoint for extra small devices */
+xs: 475px   /* Large phones in landscape */
 ```
 
 ### Touch Optimization
 
 #### Minimum Tap Targets
 ```css
-/* WCAG 2.1 AA compliance */
-button, a, [role="button"] {
-  min-height: 44px;
-  min-width: 44px;
+/* WCAG 2.1 AA compliance - 44px minimum */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 ```
 
@@ -421,20 +514,25 @@ button, a, [role="button"] {
 ```css
 /* Prevent zoom on form inputs */
 input, select, textarea {
-  font-size: 16px;
+  font-size: 16px; /* Prevents iOS zoom */
 }
 
-/* Smooth scrolling */
+/* Smooth touch scrolling */
 .scroll-container {
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+}
+
+/* Touch action optimization */
+.touch-manipulation {
+  touch-action: manipulation;
 }
 ```
 
 ### Responsive Typography
 
 ```css
-/* Adaptive text sizing */
+/* Adaptive text sizing system */
 @media (max-width: 640px) {
   h1 { @apply text-lg; }    /* 18px */
   h2 { @apply text-base; }  /* 16px */
@@ -452,39 +550,78 @@ input, select, textarea {
 
 ### Layout Adaptations
 
-#### Grid Systems
+#### Responsive Grid Systems
 ```typescript
-// Responsive grid layouts
+// Adaptive grid layouts
 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
 
-// Flexible layouts
+// Flexible container layouts
 className="flex flex-col md:flex-row items-start md:items-center"
+
+// Mobile-specific spacing
+className="p-2 sm:p-4 md:p-6"  // 8px → 16px → 24px
+className="space-y-2 sm:space-y-4 md:space-y-6"  // Vertical spacing
 ```
 
-#### Spacing System
+#### Component-Specific Adaptations
+
+**Teacher Header**:
 ```typescript
-// Mobile-first spacing
-className="p-2 sm:p-4 md:p-6"  // 8px -> 16px -> 24px
-className="space-y-2 sm:space-y-4 md:space-y-6"  // Vertical spacing
+// Mobile: Stacked layout, Desktop: Side-by-side
+<div className="flex flex-col xs:flex-row items-center xs:items-start">
+  <Avatar className="h-16 w-16 sm:h-20 sm:w-20" />
+  <div className="text-center xs:text-left">
+    {/* Content adapts to layout */}
+  </div>
+</div>
+```
+
+**Schedule Calendar**:
+```typescript
+// Mobile: Horizontal scroll, Desktop: Full width
+<ScrollArea className="w-full">
+  <div className="min-w-[800px] pb-4">
+    {/* Sticky time column for mobile */}
+    <div className="sticky left-0 z-10 bg-white">
+      {timeSlot}
+    </div>
+  </div>
+</ScrollArea>
+```
+
+**Payment Interface**:
+```typescript
+// Mobile: Stacked form, Desktop: Two-column grid
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  {/* Form fields adapt to available space */}
+</div>
 ```
 
 ## 🔌 API Integration
 
 ### Current State: Mock Data
 
-The application currently uses mock data for demonstration purposes:
+The application currently uses comprehensive mock data for demonstration:
 
 ```typescript
-// Mock teacher profile data
+// Mock teacher profile in app/page.tsx
 const mockTeacherProfile: TeacherProfile = {
   teacher: {
     id: "1",
     name: "Alynia Allan",
     role: "Teacher",
-    // ... additional fields
+    birthDate: "1985-03-15",
+    email: "alyniaallan@example.com",
+    phone: "(416) 555-9027",
+    address: {
+      street: "123 Markham Rd, Apt 1001",
+      city: "North York, Ontario",
+      country: "Canada",
+    },
   },
   privateQualifications: [
     { id: "1", name: "Vocal Contemporary", rate: 50.0, type: "private" },
+    { id: "2", name: "Vocal Jazz", rate: 55.0, type: "private" },
     // ... additional qualifications
   ],
   schedule: [
@@ -492,6 +629,7 @@ const mockTeacherProfile: TeacherProfile = {
       id: "1",
       day: "Tuesday",
       startTime: "3pm",
+      endTime: "4pm",
       status: "available",
       subject: "Vocal Jazz",
     },
@@ -505,27 +643,34 @@ const mockTeacherProfile: TeacherProfile = {
 #### Recommended API Structure
 
 ```typescript
-// API endpoints structure
+// API endpoints for teacher management
 const API_ENDPOINTS = {
+  // Teacher profile management
   teachers: {
     get: '/api/teachers/:id',
     update: '/api/teachers/:id',
     create: '/api/teachers',
     delete: '/api/teachers/:id'
   },
+  
+  // Qualifications management
   qualifications: {
-    get: '/api/teachers/:id/qualifications',
+    list: '/api/teachers/:id/qualifications',
     create: '/api/teachers/:id/qualifications',
     update: '/api/qualifications/:id',
     delete: '/api/qualifications/:id'
   },
+  
+  // Schedule management
   schedule: {
     get: '/api/teachers/:id/schedule',
     update: '/api/teachers/:id/schedule',
-    bulk: '/api/teachers/:id/schedule/bulk'
+    bulkUpdate: '/api/teachers/:id/schedule/bulk'
   },
+  
+  // Payment management
   payments: {
-    get: '/api/teachers/:id/payments',
+    list: '/api/teachers/:id/payments',
     create: '/api/payments',
     update: '/api/payments/:id',
     history: '/api/teachers/:id/payments/history'
@@ -533,47 +678,93 @@ const API_ENDPOINTS = {
 }
 ```
 
-#### Integration Steps
+#### Integration Implementation Steps
 
-1. **Replace mock data with API calls**
-   ```typescript
-   // Example API integration
-   const fetchTeacherProfile = async (id: string): Promise<TeacherProfile> => {
-     const response = await fetch(`/api/teachers/${id}`)
-     return response.json()
-   }
-   ```
+1. **Replace Mock Data with API Calls**
+```typescript
+// Example API integration in app/page.tsx
+const [teacherProfile, setTeacherProfile] = useState<TeacherProfile | null>(null)
+const [loading, setLoading] = useState(true)
+const [error, setError] = useState<string | null>(null)
 
-2. **Add loading states**
-   ```typescript
-   const [loading, setLoading] = useState(true)
-   const [error, setError] = useState<string | null>(null)
-   ```
+useEffect(() => {
+  const fetchTeacherProfile = async () => {
+    try {
+      const response = await fetch(`/api/teachers/${teacherId}`)
+      if (!response.ok) throw new Error('Failed to fetch teacher profile')
+      const data = await response.json()
+      setTeacherProfile(data)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unknown error')
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+  fetchTeacherProfile()
+}, [teacherId])
+```
 
-3. **Implement error handling**
-   ```typescript
-   try {
-     const data = await fetchTeacherProfile(teacherId)
-     setTeacherProfile(data)
-   } catch (err) {
-     setError('Failed to load teacher profile')
-   } finally {
-     setLoading(false)
-   }
-   ```
+2. **Add Loading States to Components**
+```typescript
+// Loading skeleton for teacher header
+if (loading) {
+  return (
+    <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
+      <div className="animate-pulse">
+        <div className="flex items-center space-x-4">
+          <div className="rounded-full bg-gray-300 h-20 w-20"></div>
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-300 rounded w-48"></div>
+            <div className="h-4 bg-gray-300 rounded w-32"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+3. **Implement Error Handling**
+```typescript
+// Error boundary for API failures
+if (error) {
+  return (
+    <div className="text-center py-12">
+      <div className="text-red-600 mb-4">
+        <AlertCircle className="mx-auto h-12 w-12 mb-2" />
+        <p className="text-lg font-medium">Failed to load teacher profile</p>
+        <p className="text-sm">{error}</p>
+      </div>
+      <Button onClick={() => window.location.reload()}>
+        Try Again
+      </Button>
+    </div>
+  )
+}
+```
 
 ## 🎨 Customization
 
 ### Theme Customization
 
-#### Colors
+#### Color System
 ```css
-/* Customize in globals.css */
+/* Customize in app/globals.css */
 :root {
   --primary: 221.2 83.2% 53.3%;        /* Blue primary */
   --secondary: 210 40% 96%;             /* Light gray */
   --accent: 210 40% 96%;                /* Accent color */
   --destructive: 0 84.2% 60.2%;         /* Red for errors */
+  --muted: 210 40% 96%;                 /* Muted backgrounds */
+  --border: 214.3 31.8% 91.4%;          /* Border color */
+}
+
+/* Dark mode support */
+.dark {
+  --primary: 217.2 91.2% 59.8%;
+  --secondary: 217.2 32.6% 17.5%;
+  /* ... additional dark mode colors */
 }
 ```
 
@@ -587,6 +778,14 @@ module.exports = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
+      fontSize: {
+        'xs': '0.75rem',    // 12px
+        'sm': '0.875rem',   // 14px
+        'base': '1rem',     // 16px
+        'lg': '1.125rem',   // 18px
+        'xl': '1.25rem',    // 20px
+        '2xl': '1.5rem',    // 24px
+      }
     },
   },
 }
@@ -596,14 +795,16 @@ module.exports = {
 
 #### Adding New Schedule Status
 ```typescript
-// 1. Update type definition
+// 1. Update type definition in types/teacher.ts
 type ScheduleStatus = "available" | "booked" | "unavailable" | "tentative"
 
-// 2. Add color mapping
+// 2. Add color mapping in components/schedule-calendar.tsx
 const getSlotColor = (status: string) => {
   switch (status) {
     case "tentative":
       return "bg-orange-100 border-orange-300 text-orange-800"
+    case "available":
+      return "bg-green-100 border-green-300 text-green-800"
     // ... existing cases
   }
 }
@@ -611,7 +812,11 @@ const getSlotColor = (status: string) => {
 // 3. Add badge variant
 const getStatusBadge = (status: string) => {
   if (status === "tentative") {
-    return <Badge className="bg-orange-100 text-orange-800">Tentative</Badge>
+    return (
+      <Badge className="bg-orange-100 text-orange-800 text-xs">
+        Tentative
+      </Badge>
+    )
   }
   // ... existing logic
 }
@@ -619,14 +824,19 @@ const getStatusBadge = (status: string) => {
 
 #### Custom Payment Types
 ```typescript
-// Add new payment type
+// 1. Update interface in types/teacher.ts
 interface PaymentForm {
   type: "salary" | "bonus" | "commission" | "reimbursement"
   // ... other fields
 }
 
-// Update form options
-<SelectItem value="reimbursement">Reimbursement</SelectItem>
+// 2. Add form option in components/payment-interface.tsx
+<SelectContent>
+  <SelectItem value="salary">Salary</SelectItem>
+  <SelectItem value="bonus">Bonus</SelectItem>
+  <SelectItem value="commission">Commission</SelectItem>
+  <SelectItem value="reimbursement">Reimbursement</SelectItem>
+</SelectContent>
 ```
 
 ### Responsive Breakpoint Customization
@@ -636,15 +846,17 @@ interface PaymentForm {
 module.exports = {
   theme: {
     screens: {
-      'xs': '475px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-      // Add custom breakpoints
-      'tablet': '900px',
-      'desktop': '1200px',
+      'xs': '475px',      // Extra small devices
+      'sm': '640px',      // Small devices
+      'md': '768px',      // Medium devices
+      'lg': '1024px',     // Large devices
+      'xl': '1280px',     // Extra large devices
+      '2xl': '1536px',    // 2X large devices
+      
+      // Custom breakpoints
+      'tablet': '900px',   // Custom tablet breakpoint
+      'desktop': '1200px', // Custom desktop breakpoint
+      'wide': '1600px',    // Ultra-wide screens
     },
   },
 }
@@ -654,29 +866,39 @@ module.exports = {
 
 ### Vercel Deployment (Recommended)
 
-1. **Connect to Vercel**
+1. **Connect Repository to Vercel**
    ```bash
+   # Install Vercel CLI
    npm install -g vercel
+   
+   # Login and deploy
    vercel login
-   vercel
+   vercel --prod
    ```
 
 2. **Environment Variables**
-   Set in Vercel dashboard:
-   ```
-   NEXT_PUBLIC_APP_NAME=EduManage
-   NEXT_PUBLIC_API_URL=https://your-api.com
+   Set in Vercel dashboard or via CLI:
+   ```bash
+   vercel env add NEXT_PUBLIC_APP_NAME
+   vercel env add DATABASE_URL
+   vercel env add API_SECRET_KEY
    ```
 
 3. **Build Configuration**
    ```javascript
    // next.config.js
-   module.exports = {
+   /** @type {import('next').NextConfig} */
+   const nextConfig = {
      output: 'standalone',
      images: {
-       domains: ['your-image-domain.com'],
+       domains: ['your-cdn-domain.com'],
+     },
+     experimental: {
+       optimizeCss: true,
      },
    }
+   
+   module.exports = nextConfig
    ```
 
 ### Docker Deployment
@@ -685,49 +907,71 @@ module.exports = {
 # Dockerfile
 FROM node:18-alpine AS base
 
-# Install dependencies
+# Install dependencies only when needed
 FROM base AS deps
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Build application
+# Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-# Production image
+# Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
+
 ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+
+# Set the correct permission for prerender cache
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automatically leverage output traces to reduce image size
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
+
 EXPOSE 3000
+
 ENV PORT 3000
+ENV HOSTNAME "0.0.0.0"
 
 CMD ["node", "server.js"]
 ```
 
-### Static Export (Optional)
+### Static Export (GitHub Pages)
 
 ```javascript
-// next.config.js
-module.exports = {
+// next.config.js for static export
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
 }
+
+module.exports = nextConfig
+```
+
+```bash
+# Build and export
+npm run build
+npm run export
+
+# Deploy to GitHub Pages
+# (files will be in 'out' directory)
 ```
 
 ## 🧪 Testing
@@ -736,18 +980,35 @@ module.exports = {
 
 ```bash
 # Install testing dependencies
-npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom
+npm install --save-dev @testing-library/react @testing-library/jest-dom jest jest-environment-jsdom @types/jest
 ```
 
 ```javascript
 // jest.config.js
-module.exports = {
-  testEnvironment: 'jsdom',
+const nextJest = require('next/jest')
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files
+  dir: './',
+})
+
+// Add any custom config to be passed to Jest
+const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleNameMapping: {
+    // Handle module aliases (this will be automatically configured for you based on your tsconfig.json paths)
     '^@/(.*)$': '<rootDir>/$1',
   },
+  testEnvironment: 'jest-environment-jsdom',
 }
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(customJestConfig)
+```
+
+```javascript
+// jest.setup.js
+import '@testing-library/jest-dom'
 ```
 
 ### Example Tests
@@ -756,18 +1017,37 @@ module.exports = {
 // __tests__/components/teacher-header.test.tsx
 import { render, screen } from '@testing-library/react'
 import { TeacherHeader } from '@/components/teacher-header'
+import type { Teacher } from '@/types/teacher'
 
-const mockTeacher = {
+const mockTeacher: Teacher = {
   id: '1',
   name: 'John Doe',
   role: 'Teacher',
-  // ... other fields
+  birthDate: '1985-01-01',
+  email: 'john.doe@example.com',
+  phone: '(555) 123-4567',
+  address: {
+    street: '123 Main St',
+    city: 'Toronto',
+    country: 'Canada'
+  }
 }
 
 describe('TeacherHeader', () => {
   it('renders teacher name correctly', () => {
     render(<TeacherHeader teacher={mockTeacher} />)
     expect(screen.getByText('John Doe')).toBeInTheDocument()
+  })
+
+  it('displays teacher role badge', () => {
+    render(<TeacherHeader teacher={mockTeacher} />)
+    expect(screen.getByText('Teacher')).toBeInTheDocument()
+  })
+
+  it('shows contact information', () => {
+    render(<TeacherHeader teacher={mockTeacher} />)
+    expect(screen.getByText('john.doe@example.com')).toBeInTheDocument()
+    expect(screen.getByText('(555) 123-4567')).toBeInTheDocument()
   })
 
   it('displays edit button', () => {
@@ -780,20 +1060,35 @@ describe('TeacherHeader', () => {
 ### Mobile Testing
 
 ```typescript
-// Mobile viewport testing
+// __tests__/mobile/responsive.test.tsx
 import { render } from '@testing-library/react'
+import { Sidebar } from '@/components/sidebar'
 
-// Mock mobile viewport
-Object.defineProperty(window, 'innerWidth', {
-  writable: true,
-  configurable: true,
-  value: 375,
-})
+// Mock window.innerWidth for mobile testing
+const mockInnerWidth = (width: number) => {
+  Object.defineProperty(window, 'innerWidth', {
+    writable: true,
+    configurable: true,
+    value: width,
+  })
+  window.dispatchEvent(new Event('resize'))
+}
 
-// Test mobile-specific behavior
-describe('Mobile Navigation', () => {
+describe('Mobile Responsiveness', () => {
   it('shows mobile drawer on small screens', () => {
-    // Test implementation
+    mockInnerWidth(375) // iPhone SE width
+    render(<Sidebar />)
+    
+    // Test mobile-specific behavior
+    expect(screen.getByRole('button', { name: /menu/i })).toBeInTheDocument()
+  })
+
+  it('shows desktop sidebar on large screens', () => {
+    mockInnerWidth(1024) // Desktop width
+    render(<Sidebar />)
+    
+    // Test desktop-specific behavior
+    expect(screen.queryByRole('button', { name: /menu/i })).not.toBeInTheDocument()
   })
 })
 ```
@@ -803,7 +1098,7 @@ describe('Mobile Navigation', () => {
 ### Bundle Analysis
 
 ```bash
-# Analyze bundle size
+# Install bundle analyzer
 npm install --save-dev @next/bundle-analyzer
 
 # Add to next.config.js
@@ -812,28 +1107,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 module.exports = withBundleAnalyzer({
-  // ... your config
+  // ... your existing config
 })
 
 # Run analysis
 ANALYZE=true npm run build
-```
-
-### Image Optimization
-
-```typescript
-// Use Next.js Image component
-import Image from 'next/image'
-
-<Image
-  src="/teacher-avatar.jpg"
-  alt="Teacher Avatar"
-  width={80}
-  height={80}
-  priority={true}
-  placeholder="blur"
-  blurDataURL="data:image/jpeg;base64,..."
-/>
 ```
 
 ### Code Splitting
@@ -845,256 +1123,31 @@ import dynamic from 'next/dynamic'
 const PaymentInterface = dynamic(
   () => import('@/components/payment-interface'),
   { 
-    loading: () => <PaymentSkeleton />,
+    loading: () => <div className="animate-pulse h-96 bg-gray-200 rounded" />,
     ssr: false 
+  }
+)
+
+const ScheduleCalendar = dynamic(
+  () => import('@/components/schedule-calendar'),
+  { 
+    loading: () => <div className="animate-pulse h-64 bg-gray-200 rounded" />
   }
 )
 ```
 
-## 🔒 Security Considerations
-
-### Input Validation
+### Image Optimization
 
 ```typescript
-// Client-side validation
-const validatePaymentForm = (data: PaymentForm): FormErrors => {
-  const errors: FormErrors = {}
-  
-  // Amount validation
-  if (!data.amount || parseFloat(data.amount) <= 0) {
-    errors.amount = 'Invalid amount'
-  }
-  
-  // XSS prevention
-  if (data.description.includes('<script>')) {
-    errors.description = 'Invalid characters detected'
-  }
-  
-  return errors
-}
-```
+// Use Next.js Image component for avatars
+import Image from 'next/image'
 
-### Environment Variables
-
-```bash
-# .env.local (never commit to version control)
-DATABASE_URL=postgresql://...
-API_SECRET_KEY=your-secret-key
-NEXTAUTH_SECRET=your-nextauth-secret
-```
-
-### Content Security Policy
-
-```javascript
-// next.config.js
-module.exports = {
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-## 📚 Assumptions Made
-
-### 1. User Behavior Assumptions
-
-**Mobile Usage Patterns**:
-- Users primarily access the system on mobile devices during teaching hours
-- Quick schedule checks are more common than detailed editing
-- Touch interactions are preferred over keyboard input on mobile
-
-**Desktop Usage Patterns**:
-- Administrative tasks (payments, detailed editing) primarily done on desktop
-- Multiple tabs/windows may be open simultaneously
-- Keyboard shortcuts and hover states are expected
-
-### 2. Data Structure Assumptions
-
-**Teacher Profile**:
-- Each teacher has a unique ID
-- Contact information is always available
-- Profile pictures are optional (fallback to initials)
-
-**Schedule System**:
-- 30-minute time slot granularity is sufficient
-- Week view (7 days) is the primary scheduling interface
-- Time slots from 7:30 AM to 6:00 PM cover all teaching hours
-
-**Payment System**:
-- Three payment types (salary, bonus, commission) cover all scenarios
-- Payment methods are predefined (bank transfer, PayPal, check, cash)
-- USD currency is the primary/only currency
-
-### 3. Technical Assumptions
-
-**Browser Support**:
-- Modern browsers with ES2020+ support
-- CSS Grid and Flexbox support
-- Touch event support for mobile devices
-
-**Performance Requirements**:
-- Initial page load under 3 seconds on 3G networks
-- Smooth 60fps animations on mobile devices
-- Offline functionality not required (online-first approach)
-
-**Screen Size Support**:
-- Minimum supported width: 320px (iPhone 5/SE)
-- Maximum optimized width: 1920px (standard desktop)
-- Primary breakpoints: 475px, 640px, 768px, 1024px, 1280px
-
-### 4. Business Logic Assumptions
-
-**Qualification Management**:
-- Private and group qualifications are mutually exclusive categories
-- Hourly rates are in USD with 2 decimal precision
-- Qualification names are unique per teacher
-
-**Schedule Management**:
-- Teachers can have multiple subjects per time slot
-- Schedule conflicts are handled at the UI level (visual indicators)
-- Historical schedule data is maintained for reporting
-
-**Payment Processing**:
-- Payments are scheduled, not processed immediately
-- Payment status tracking is essential for accounting
-- Multiple payment methods per teacher are supported
-
-### 5. Integration Assumptions
-
-**Future API Integration**:
-- RESTful API with JSON responses
-- Standard HTTP status codes for error handling
-- JWT or session-based authentication
-
-**Database Structure**:
-- Relational database (PostgreSQL assumed)
-- Normalized data structure with foreign key relationships
-- Audit trails for payment and schedule changes
-
-**Third-Party Services**:
-- Payment processing through external gateway (Stripe/PayPal)
-- Email notifications for payment confirmations
-- Calendar integration (Google Calendar/Outlook) for schedule sync
-
-## 🤝 Contributing
-
-### Development Setup
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. **Make your changes**
-4. **Run tests**
-   ```bash
-   npm run test
-   npm run lint
-   npm run type-check
-   ```
-
-5. **Submit a pull request**
-
-### Code Standards
-
-#### TypeScript
-- Use strict type checking
-- Define interfaces for all data structures
-- Avoid `any` type usage
-
-#### React
-- Use functional components with hooks
-- Implement proper error boundaries
-- Follow React best practices for performance
-
-#### CSS/Styling
-- Use Tailwind utility classes
-- Avoid custom CSS unless necessary
-- Maintain responsive design principles
-
-#### Git Workflow
-```bash
-# Commit message format
-feat: add mobile drawer navigation
-fix: resolve schedule grid scrolling issue
-docs: update README with deployment instructions
-style: improve mobile button spacing
-refactor: extract payment validation logic
-test: add unit tests for teacher header
-```
-
-### Pull Request Guidelines
-
-1. **Clear description** of changes made
-2. **Screenshots** for UI changes (desktop + mobile)
-3. **Test coverage** for new features
-4. **Documentation updates** if applicable
-5. **Performance impact** assessment for large changes
-
-## 📄 License
-
-MIT License
-
-Copyright (c) 2024 EduManage
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-## 📞 Support
-
-### Getting Help
-
-- **Documentation**: Check this README and inline code comments
-- **Issues**: Create a GitHub issue for bugs or feature requests
-- **Discussions**: Use GitHub Discussions for questions and ideas
-
-### Reporting Issues
-
-When reporting issues, please include:
-
-1. **Environment details** (OS, browser, screen size)
-2. **Steps to reproduce** the issue
-3. **Expected vs actual behavior**
-4. **Screenshots** (especially for mobile issues)
-5. **Console errors** if applicable
-
-### Feature Requests
-
-For new features, please provide:
-
-1. **Use case description** and user story
-2. **Mockups or wireframes** if applicable
-3. **Technical considerations** you've thought of
-4. **Priority level** and business justification
-
----
-
-**Built with ❤️ for modern education management**
-
-*EduManage - Empowering educators with intuitive, mobile-first management tools*
+<Image
+  src="/teacher-avatar.jpg"
+  alt="Teacher Avatar"
+  width={80}
+  height={80}
+  priority={true}
+  className="rounded-full"
+  placeholder="blur"
+  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R+Sh7tZdZhZhMvqX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+
