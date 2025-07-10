@@ -4,6 +4,13 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 
 ![EduManage Preview](https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=EduManage+Teacher+Management+System)
 
+## Live Demo URL
+```bash https://edu-manage-delta.vercel.app/```
+![Live Demo](https://edu-manage-delta.vercel.app/)
+
+## Loom Video Link
+![Loom Video](https://www.loom.com/share/8561cd1987094af78052ed85945d3ab1?sid=528ea6c9-e932-41b4-beac-3e6c63f7e203)
+
 ## 🚀 Features
 
 ### 📱 Mobile-First Design
