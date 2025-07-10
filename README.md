@@ -508,25 +508,6 @@ xs: 475px   /* Large phones in landscape */
 }
 ```
 
-#### iOS Safari Optimizations
-```css
-/* Prevent zoom on form inputs */
-input, select, textarea {
-  font-size: 16px; /* Prevents iOS zoom */
-}
-
-/* Smooth touch scrolling */
-.scroll-container {
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-}
-
-/* Touch action optimization */
-.touch-manipulation {
-  touch-action: manipulation;
-}
-```
-
 ### Responsive Typography
 
 ```css
@@ -593,114 +574,6 @@ className="space-y-2 sm:space-y-4 md:space-y-6"  // Vertical spacing
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
   {/* Form fields adapt to available space */}
 </div>
-```
-
-## 🔌 API Integration
-
-### Current State: Mock Data
-
-The application currently uses comprehensive mock data for demonstration:
-
-```typescript
-// Mock teacher profile in app/page.tsx
-const mockTeacherProfile: TeacherProfile = {
-  teacher: {
-    id: "1",
-    name: "Alynia Allan",
-    role: "Teacher",
-    birthDate: "1985-03-15",
-    email: "alyniaallan@example.com",
-    phone: "(416) 555-9027",
-    address: {
-      street: "123 Markham Rd, Apt 1001",
-      city: "North York, Ontario",
-      country: "Canada",
-    },
-  },
-  privateQualifications: [
-    { id: "1", name: "Vocal Contemporary", rate: 50.0, type: "private" },
-    { id: "2", name: "Vocal Jazz", rate: 55.0, type: "private" },
-    // ... additional qualifications
-  ],
-  schedule: [
-    {
-      id: "1",
-      day: "Tuesday",
-      startTime: "3pm",
-      endTime: "4pm",
-      status: "available",
-      subject: "Vocal Jazz",
-    },
-    // ... additional schedule slots
-  ],
-}
-```
-
-### Future API Integration
-
-#### Recommended API Structure
-
-```typescript
-// API endpoints for teacher management
-const API_ENDPOINTS = {
-  // Teacher profile management
-  teachers: {
-    get: '/api/teachers/:id',
-    update: '/api/teachers/:id',
-    create: '/api/teachers',
-    delete: '/api/teachers/:id'
-  },
-  
-  // Qualifications management
-  qualifications: {
-    list: '/api/teachers/:id/qualifications',
-    create: '/api/teachers/:id/qualifications',
-    update: '/api/qualifications/:id',
-    delete: '/api/qualifications/:id'
-  },
-  
-  // Schedule management
-  schedule: {
-    get: '/api/teachers/:id/schedule',
-    update: '/api/teachers/:id/schedule',
-    bulkUpdate: '/api/teachers/:id/schedule/bulk'
-  },
-  
-  // Payment management
-  payments: {
-    list: '/api/teachers/:id/payments',
-    create: '/api/payments',
-    update: '/api/payments/:id',
-    history: '/api/teachers/:id/payments/history'
-  }
-}
-```
-
-#### Integration Implementation Steps
-
-1. **Replace Mock Data with API Calls**
-```typescript
-// Example API integration in app/page.tsx
-const [teacherProfile, setTeacherProfile] = useState<TeacherProfile | null>(null)
-const [loading, setLoading] = useState(true)
-const [error, setError] = useState<string | null>(null)
-
-useEffect(() => {
-  const fetchTeacherProfile = async () => {
-    try {
-      const response = await fetch(`/api/teachers/${teacherId}`)
-      if (!response.ok) throw new Error('Failed to fetch teacher profile')
-      const data = await response.json()
-      setTeacherProfile(data)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
-    } finally {
-      setLoading(false)
-    }
-  }
-  
-  fetchTeacherProfile()
-}, [teacherId])
 ```
 
 2. **Add Loading States to Components**
@@ -898,54 +771,6 @@ module.exports = {
    
    module.exports = nextConfig
    ```
-
-### Docker Deployment
-
-```dockerfile
-# Dockerfile
-FROM node:18-alpine AS base
-
-# Install dependencies only when needed
-FROM base AS deps
-WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci
-
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-RUN npm run build
-
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
-
-CMD ["node", "server.js"]
-```
 
 ### Static Export (GitHub Pages)
 
