@@ -51,10 +51,10 @@ A modern, fully responsive teacher management interface built with Next.js, Type
 ### Quick Start
 
 1. **Clone the repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/your-username/edumanage-teacher-system.git
    cd edumanage-teacher-system
-   \`\`\`
+   ```
 
 2. **Install dependencies**
    \`\`\`bash
