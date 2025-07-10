@@ -114,8 +114,6 @@ npm run type-check
 
 ```
 teacher-management/
-├── types/
-│   └── teacher.ts              # TypeScript interfaces and types
 ├── components/
 │   ├── sidebar.tsx             # Navigation sidebar with mobile support
 │   ├── teacher-header.tsx      # Teacher profile header component
